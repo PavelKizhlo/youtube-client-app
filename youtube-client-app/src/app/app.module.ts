@@ -8,9 +8,16 @@ import { HeaderComponent } from './header/header.component';
 import { SearchItemComponent } from './search/search-item/search-item.component';
 import { SearchListComponent } from './search/search-list/search-list.component';
 import { MaterialModule } from './shared/material.module';
+import { FilteringBlockComponent } from './header/filtering-block/filtering-block.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, SearchItemComponent, SearchListComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    SearchItemComponent,
+    SearchListComponent,
+    FilteringBlockComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MaterialModule],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,20 @@
+<mat-toolbar class="filter-block">
+  <span class="mat-body-1 filter-label">Sort by:</span>
+
+  <button mat-button [matMenuTriggerFor]="dateSort">date</button>
+  <mat-menu #dateSort="matMenu">
+    <button mat-menu-item>from newest</button>
+    <button mat-menu-item>from oldest</button>
+  </mat-menu>
+
+  <button class="views-button" mat-button [matMenuTriggerFor]="viewsSort">count of views</button>
+  <mat-menu #viewsSort="matMenu">
+    <button mat-menu-item>most viewed</button>
+    <button mat-menu-item>least viewed</button>
+  </mat-menu>
+
+  <mat-form-field class="filter-field" appearance="outline">
+    <mat-label>by word or sentence</mat-label>
+    <input type="text" placeholder="filter by ..." matInput>
+  </mat-form-field>
+</mat-toolbar>
