@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header/header.component';
+import { HeaderComponent } from './header/header.component';
 import { SearchItemComponent } from './search/search-item/search-item.component';
 import { SearchListComponent } from './search/search-list/search-list.component';
 import { MaterialModule } from './shared/material.module';
