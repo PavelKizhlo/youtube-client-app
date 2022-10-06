@@ -1,5 +1,14 @@
 .card {
-  width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 312px;
+  height: 100%;
+  box-sizing: border-box;
+
+  &-content {
+    border-radius: 4px 4px 0 0;
+  }
 
   &-title {
     text-align: center;

@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SearchItemModel } from '../../models/search-item.model';
-import { cardData } from '../../mocks/card-example';
 
 @Component({
   selector: 'app-search-item',
@@ -8,5 +7,5 @@ import { cardData } from '../../mocks/card-example';
   styleUrls: ['./search-item.component.scss'],
 })
 export class SearchItemComponent {
-  searchItemData: SearchItemModel = cardData;
+  @Input() searchItemData: SearchItemModel;
 }

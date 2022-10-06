@@ -1,6 +1,6 @@
 <mat-card class="card">
-  <img mat-card-image [src]="searchItemData.snippet.thumbnails.maxres.url">
-  <mat-card-content>
+  <mat-card-content class="card-content">
+    <img mat-card-image [src]="searchItemData.snippet.thumbnails.maxres.url">
     <div class="stat">
       <div class="stat-item">
         <mat-icon fontIcon="visibility"></mat-icon>
@@ -20,9 +20,9 @@
       </div>
     </div>
   </mat-card-content>
-  <mat-card-header>
-    <mat-card-title class="card-title">{{searchItemData.snippet.title}}</mat-card-title>
-  </mat-card-header>
+
+  <mat-card-title class="mat-title card-title">{{searchItemData.snippet.title}}</mat-card-title>
+
   <mat-card-actions class="button-block">
     <button class="more-button" mat-raised-button color="primary">More ...</button>
   </mat-card-actions>
