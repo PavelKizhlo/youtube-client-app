@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SearchResponseModel } from '../../models/search-response.model';
-import { response } from '../../mocks/response-example';
 
 @Component({
   selector: 'app-search-list',
@@ -8,5 +7,5 @@ import { response } from '../../mocks/response-example';
   styleUrls: ['./search-list.component.scss'],
 })
 export class SearchListComponent {
-  searchData: SearchResponseModel = response;
+  @Input() searchData: SearchResponseModel;
 }

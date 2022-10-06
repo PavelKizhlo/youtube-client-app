@@ -9,6 +9,7 @@ import { SearchItemComponent } from './search/search-item/search-item.component'
 import { SearchListComponent } from './search/search-list/search-list.component';
 import { MaterialModule } from './shared/material.module';
 import { FilteringBlockComponent } from './header/filtering-block/filtering-block.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { FilteringBlockComponent } from './header/filtering-block/filtering-bloc
     SearchListComponent,
     FilteringBlockComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MaterialModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, BrowserAnimationsModule, MaterialModule],
   providers: [],
   bootstrap: [AppComponent],
 })

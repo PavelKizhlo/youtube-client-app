@@ -5,7 +5,7 @@
     <img class="logo" src="./assets/youtube-logo.svg" alt="logo">
 
     <div class="search-bar">
-      <form class="search-form">
+      <form class="search-form" (ngSubmit)="submit()">
         <mat-form-field class="search-form-field" appearance="outline">
           <mat-label>What are you want to find out?</mat-label>
           <input type="text" placeholder="Search ..." matInput>
@@ -14,7 +14,12 @@
       </form>
     </div>
 
-    <button class="settings-button" mat-raised-button color="primary">
+    <button
+      class="settings-button"
+      mat-raised-button
+      color="primary"
+      (click)="toggleFilter()"
+    >
       <mat-icon>tune</mat-icon>
     </button>
   </div>
@@ -26,3 +31,5 @@
     </button>
   </div>
 </mat-toolbar>
+
+<app-filtering-block *ngIf="showFilter"></app-filtering-block>

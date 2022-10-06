@@ -1,1 +1,8 @@
-<app-header></app-header>
+<app-header
+  (search)="getSearchResults($event)"
+></app-header>
+
+<app-search-list
+  *ngIf="searchData"
+  [searchData]="searchData"
+></app-search-list>
