@@ -1,4 +1,7 @@
-<mat-card class="card">
+<mat-card
+  class="card"
+  [appDateStatus]="searchItemData.snippet.publishedAt"
+>
   <mat-card-content class="card-content">
     <img mat-card-image [src]="searchItemData.snippet.thumbnails.maxres.url">
     <div class="stat">
