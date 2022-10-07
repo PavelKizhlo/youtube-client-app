@@ -1,6 +1,14 @@
 import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { SearchResponseModel } from '../models/search-response.model';
 import { response } from '../mocks/response-example';
+import { SortOrder } from './filtering-block/filtering-block.component';
+
+export type SortBy = 'date' | 'views';
+
+export interface SortData {
+  type: SortBy;
+  sort: SortOrder;
+}
 
 @Component({
   selector: 'app-header',
@@ -11,6 +19,8 @@ import { response } from '../mocks/response-example';
 export class HeaderComponent {
   @Output() search: EventEmitter<SearchResponseModel> = new EventEmitter<SearchResponseModel>();
 
+  @Output() sort: EventEmitter<SortData> = new EventEmitter<SortData>();
+
   showFilter = false;
 
   submit() {
@@ -19,5 +29,9 @@ export class HeaderComponent {
 
   toggleFilter() {
     this.showFilter = !this.showFilter;
+  }
+
+  changeSort(sortOrder: SortOrder, sortBy: SortBy) {
+    this.sort.emit({ type: sortBy, sort: sortOrder });
   }
 }

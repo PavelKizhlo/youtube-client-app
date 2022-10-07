@@ -1,16 +1,40 @@
 <mat-toolbar class="filter-block">
   <span class="mat-body-1 filter-label">Sort by:</span>
 
-  <button mat-button [matMenuTriggerFor]="dateSort">date</button>
+  <button mat-button [matMenuTriggerFor]="dateSort">
+    date
+    <mat-icon
+      class="sort-icon"
+      fontIcon="arrow_upward"
+      *ngIf="dateSortOrder === 'asc'"
+    ></mat-icon>
+    <mat-icon
+      class="sort-icon"
+      fontIcon="arrow_downward"
+      *ngIf="dateSortOrder === 'desc'"
+    ></mat-icon>
+  </button>
   <mat-menu #dateSort="matMenu">
-    <button mat-menu-item>from newest</button>
-    <button mat-menu-item>from oldest</button>
+    <button mat-menu-item (click)="changeDateSort('desc')">from newest</button>
+    <button mat-menu-item (click)="changeDateSort('asc')">from oldest</button>
   </mat-menu>
 
-  <button class="views-button" mat-button [matMenuTriggerFor]="viewsSort">count of views</button>
+  <button class="views-button" mat-button [matMenuTriggerFor]="viewsSort">
+    count of views
+    <mat-icon
+      class="sort-icon"
+      fontIcon="arrow_upward"
+      *ngIf="viewSortOrder === 'asc'"
+    ></mat-icon>
+    <mat-icon
+      class="sort-icon"
+      fontIcon="arrow_downward"
+      *ngIf="viewSortOrder === 'desc'"
+    ></mat-icon>
+  </button>
   <mat-menu #viewsSort="matMenu">
-    <button mat-menu-item>most viewed</button>
-    <button mat-menu-item>least viewed</button>
+    <button mat-menu-item (click)="changeViewSort('desc')">most viewed</button>
+    <button mat-menu-item (click)="changeViewSort('asc')">least viewed</button>
   </mat-menu>
 
   <mat-form-field class="filter-field" appearance="outline">

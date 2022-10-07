@@ -32,4 +32,8 @@
   </div>
 </mat-toolbar>
 
-<app-filtering-block *ngIf="showFilter"></app-filtering-block>
+<app-filtering-block
+  *ngIf="showFilter"
+  (dateSort)="changeSort($event, 'date')"
+  (viewSort)="changeSort($event, 'views')"
+></app-filtering-block>
