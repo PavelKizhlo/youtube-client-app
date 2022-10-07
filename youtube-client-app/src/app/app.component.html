@@ -1,9 +1,10 @@
 <app-header
   (search)="getSearchResults($event)"
   (sort)="sortResults($event)"
+  (filter)="filterString = $event"
 ></app-header>
 
 <app-search-list
   *ngIf="searchData"
-  [searchData]="searchData"
+  [searchData]="searchData.items | searchFilter:filterString"
 ></app-search-list>

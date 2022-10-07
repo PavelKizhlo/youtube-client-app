@@ -10,6 +10,8 @@ import { SortData } from './header/header.component';
 export class AppComponent {
   searchData: SearchResponseModel;
 
+  filterString: string = '';
+
   getSearchResults(searchResults: SearchResponseModel) {
     this.searchData = searchResults;
   }

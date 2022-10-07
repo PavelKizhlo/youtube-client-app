@@ -13,9 +13,13 @@ export class FilteringBlockComponent {
 
   @Output() viewSort: EventEmitter<SortOrder> = new EventEmitter<SortOrder>();
 
+  @Output() filterString: EventEmitter<string> = new EventEmitter<string>();
+
   dateSortOrder: SortOrder;
 
   viewSortOrder: SortOrder;
+
+  filterInputValue = '';
 
   changeDateSort(sort: SortOrder) {
     this.viewSortOrder = undefined;
@@ -27,5 +31,14 @@ export class FilteringBlockComponent {
     this.dateSortOrder = undefined;
     this.viewSortOrder = sort;
     this.viewSort.emit(sort);
+  }
+
+  changeFilterString() {
+    this.filterString.emit(this.filterInputValue);
+  }
+
+  clearFilterString() {
+    this.filterInputValue = '';
+    this.filterString.emit(this.filterInputValue);
   }
 }

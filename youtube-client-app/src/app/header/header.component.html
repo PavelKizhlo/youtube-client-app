@@ -36,4 +36,5 @@
   *ngIf="showFilter"
   (dateSort)="changeSort($event, 'date')"
   (viewSort)="changeSort($event, 'views')"
+  (filterString)="changeFilter($event)"
 ></app-filtering-block>

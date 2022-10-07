@@ -21,6 +21,8 @@ export class HeaderComponent {
 
   @Output() sort: EventEmitter<SortData> = new EventEmitter<SortData>();
 
+  @Output() filter: EventEmitter<string> = new EventEmitter<string>();
+
   showFilter = false;
 
   submit() {
@@ -33,5 +35,9 @@ export class HeaderComponent {
 
   changeSort(sortOrder: SortOrder, sortBy: SortBy) {
     this.sort.emit({ type: sortBy, sort: sortOrder });
+  }
+
+  changeFilter(filterInputValue: string) {
+    this.filter.emit(filterInputValue);
   }
 }

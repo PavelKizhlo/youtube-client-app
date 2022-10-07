@@ -11,6 +11,7 @@ import { MaterialModule } from './shared/material.module';
 import { FilteringBlockComponent } from './header/filtering-block/filtering-block.component';
 import { FormsModule } from '@angular/forms';
 import { DateStatusDirective } from './directives/date-status.directive';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { DateStatusDirective } from './directives/date-status.directive';
     SearchListComponent,
     FilteringBlockComponent,
     DateStatusDirective,
+    SearchFilterPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, BrowserAnimationsModule, MaterialModule],
   providers: [],

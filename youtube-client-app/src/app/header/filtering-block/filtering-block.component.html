@@ -39,6 +39,20 @@
 
   <mat-form-field class="filter-field" appearance="outline">
     <mat-label>by word or sentence</mat-label>
-    <input type="text" placeholder="filter by ..." matInput>
+    <input
+      type="text"
+      placeholder="filter by ..."
+      matInput
+      [(ngModel)]="filterInputValue"
+      (input)="changeFilterString()"
+    >
+    <button
+      *ngIf="filterInputValue"
+      matSuffix
+      mat-icon-button
+      (click)="clearFilterString()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
 </mat-toolbar>
