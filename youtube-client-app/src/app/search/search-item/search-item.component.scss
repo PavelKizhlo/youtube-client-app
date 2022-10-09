@@ -1,0 +1,40 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 312px;
+  height: 100%;
+  box-sizing: border-box;
+  border-bottom: 10px solid;
+
+  &-content {
+    border-radius: 4px 4px 0 0;
+  }
+
+  &-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+
+  &-item {
+    display: flex;
+    align-items: center;
+  }
+
+  &-text {
+    margin-left: 5px;
+  }
+}
+
+.button-block {
+  text-align: center;
+
+  .more-button {
+    width: 120px;
+  }
+}
