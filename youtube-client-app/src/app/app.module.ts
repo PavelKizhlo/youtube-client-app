@@ -1,29 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { SearchItemComponent } from './search/search-item/search-item.component';
-import { SearchListComponent } from './search/search-list/search-list.component';
-import { MaterialModule } from './shared/material.module';
-import { FilteringBlockComponent } from './header/filtering-block/filtering-block.component';
-import { FormsModule } from '@angular/forms';
-import { DateStatusDirective } from './directives/date-status.directive';
-import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { CoreModule } from './core/core.module';
+import { YoutubeModule } from './youtube/youtube.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    SearchItemComponent,
-    SearchListComponent,
-    FilteringBlockComponent,
-    DateStatusDirective,
-    SearchFilterPipe,
-  ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, BrowserAnimationsModule, MaterialModule],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, CoreModule, YoutubeModule],
   providers: [],
   bootstrap: [AppComponent],
 })

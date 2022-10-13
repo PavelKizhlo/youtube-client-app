@@ -44,7 +44,7 @@
       placeholder="filter by ..."
       matInput
       [(ngModel)]="filterInputValue"
-      (input)="changeFilterString()"
+      (ngModelChange)="changeFilterString()"
     >
     <button
       *ngIf="filterInputValue"

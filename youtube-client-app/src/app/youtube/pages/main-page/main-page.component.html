@@ -1,0 +1,4 @@
+<app-search-list
+  *ngIf="searchData"
+  [searchData]="searchData.items | searchFilter:filterString"
+></app-search-list>
