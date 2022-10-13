@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FilteringBlockComponent } from './components/filtering-block/filtering-block.component';
@@ -7,7 +8,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 
 @NgModule({
   declarations: [HeaderComponent, FilteringBlockComponent, NotFoundPageComponent],
-  imports: [SharedModule],
+  imports: [SharedModule, RouterModule],
   exports: [HeaderComponent, FilteringBlockComponent, NotFoundPageComponent],
 })
 export class CoreModule {}
