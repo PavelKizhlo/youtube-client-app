@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 import { SearchService } from '../../services/search.service';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { SearchService } from '../../services/search.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
-  constructor(private searchService: SearchService) {}
+  constructor(private searchService: SearchService, private authService: AuthService) {}
 
   showFilter = false;
 
@@ -21,5 +22,9 @@ export class HeaderComponent {
 
   toggleFilter() {
     this.showFilter = !this.showFilter;
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
