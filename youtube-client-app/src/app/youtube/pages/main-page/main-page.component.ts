@@ -33,6 +33,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.searchData = this.youtubeFetchService.currentResults;
+
     this.searchSub = this.searchService.searchString$.subscribe((searchString) => {
       this.getSearchResults(searchString);
     });
@@ -53,13 +55,15 @@ export class MainPageComponent implements OnInit, OnDestroy {
       .search(searchString)
       .subscribe((results: SearchResponseModel) => {
         this.searchData = results;
+        this.youtubeFetchService.currentResults = results;
       });
   }
 
   ngOnDestroy(): void {
+    // Should I unsubscribe from this ?
+    // this.fetchSub.unsubscribe();
     this.searchSub.unsubscribe();
     this.sortSub.unsubscribe();
     this.filterSub.unsubscribe();
-    this.fetchSub.unsubscribe();
   }
 }

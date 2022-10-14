@@ -29,6 +29,10 @@ export class DateStatusDirective implements OnInit {
       color = '#c10000';
     }
 
-    this.renderer.setStyle(this.element.nativeElement, 'border-color', color);
+    if ((this.element.nativeElement as HTMLElement).tagName === 'A') {
+      this.renderer.setStyle(this.element.nativeElement, 'background-color', color);
+    } else {
+      this.renderer.setStyle(this.element.nativeElement, 'border-color', color);
+    }
   }
 }

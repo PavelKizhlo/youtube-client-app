@@ -1,1 +1,47 @@
-<p>detailed-page works!</p>
+<mat-card
+  class="card"
+  [appDateStatus]="cardData.snippet.publishedAt"
+>
+  <mat-card-content class="card-content">
+    <img class="card-img" [src]="cardData.snippet.thumbnails.maxres.url">
+
+    <div class="card-info">
+      <mat-card-title class="mat-title card-title">{{cardData.snippet.title}}</mat-card-title>
+
+      <p class="mat-hint mat-body-2">{{cardData.snippet.publishedAt | date:'EEEE, MMMM d, y'}}</p>
+
+      <div class="description">
+        <span class="mat-title">Description:</span>
+        <p class="mat-body-1 description-text">{{cardData.snippet.description}}</p>
+      </div>
+
+      <div class="stat">
+        <div class="stat-item">
+          <mat-icon fontIcon="visibility"></mat-icon>
+          <span class="stat-text">{{cardData.statistics.viewCount}}</span>
+        </div>
+        <div class="stat-item">
+          <mat-icon fontIcon="favorite"></mat-icon>
+          <span class="stat-text">{{cardData.statistics.likeCount}}</span>
+        </div>
+        <div class="stat-item">
+          <mat-icon fontIcon="thumb_down"></mat-icon>
+          <span class="stat-text">{{cardData.statistics.dislikeCount}}</span>
+        </div>
+        <div class="stat-item">
+          <mat-icon fontIcon="comment"></mat-icon>
+          <span class="stat-text">{{cardData.statistics.commentCount}}</span>
+        </div>
+      </div>
+    </div>
+
+    <a
+      class="back-link"
+      routerLink="/"
+      [appDateStatus]="cardData.snippet.publishedAt"
+    >
+      <mat-icon fontIcon="arrow_back_ios"></mat-icon>
+    </a>
+  </mat-card-content>
+
+</mat-card>

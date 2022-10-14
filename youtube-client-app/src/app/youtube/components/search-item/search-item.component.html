@@ -27,6 +27,6 @@
   <mat-card-title class="mat-title card-title">{{searchItemData.snippet.title}}</mat-card-title>
 
   <mat-card-actions class="button-block">
-    <button class="more-button" mat-raised-button color="primary">More ...</button>
+    <a [routerLink]="['id', searchItemData.id]" class="more-button" mat-raised-button color="primary">More ...</a>
   </mat-card-actions>
 </mat-card>
