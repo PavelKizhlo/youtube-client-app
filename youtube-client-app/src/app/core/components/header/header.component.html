@@ -1,0 +1,45 @@
+<mat-toolbar class="header">
+  <a routerLink="/" class="home-link">YouTube Client App</a>
+
+  <div class="search-block">
+    <img class="logo" src="../../../../assets/youtube-logo.svg" alt="logo">
+
+    <div class="search-bar">
+      <form class="search-form" (ngSubmit)="submit()">
+        <mat-form-field class="search-form-field" appearance="outline">
+          <mat-label>What do you want to find out?</mat-label>
+          <input
+            name="search"
+            type="text"
+            autocomplete="off"
+            placeholder="Search ..."
+            matInput
+            [(ngModel)]="searchString"
+          >
+        </mat-form-field>
+        <button class="search-button" mat-raised-button color="primary" type="submit">Search</button>
+      </form>
+    </div>
+
+    <button
+      class="settings-button"
+      mat-raised-button
+      color="primary"
+      (click)="toggleFilter()"
+    >
+      <mat-icon>tune</mat-icon>
+    </button>
+  </div>
+
+  <div class="profile">
+    <span class="mat-body-1 profile__name">Your name</span>
+    <button class="profile-button" mat-mini-fab color="primary" [mat-menu-trigger-for]="loginMenu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #loginMenu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+
+<app-filtering-block *ngIf="showFilter"></app-filtering-block>

@@ -1,0 +1,33 @@
+.container {
+  padding-top: 300px;
+
+  &__inner {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+
+    .image {
+      width: 200px;
+    }
+  }
+
+  .error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &-title {
+      margin-bottom: 0;
+    }
+
+    &-subtitle {
+      margin-bottom: 10px;
+    }
+
+    &-link {
+      margin-bottom: 0;
+      text-decoration: underline;
+      text-underline-offset: 8px;
+    }
+  }
+}

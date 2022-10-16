@@ -1,0 +1,46 @@
+.card {
+  width: 90%;
+  margin: 30px auto;
+  box-sizing: border-box;
+  border-bottom: 10px solid;
+
+  &-content {
+    position: relative;
+    display: flex;
+    gap: 3%;
+  }
+
+  &-img {
+    width: 45%;
+    object-fit: contain;
+  }
+}
+
+.description-text {
+  white-space: pre-wrap;
+}
+
+.stat {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+  &-item {
+    display: flex;
+    align-items: center;
+  }
+
+  &-text {
+    margin-left: 5px;
+  }
+}
+
+.back-link {
+  position: absolute;
+  top: 0;
+  left: -45px;
+  display: flex;
+  padding: 5px 0 5px 5px;
+  border-radius: 3px 0 0 3px;
+  color: #ffffff;
+}
