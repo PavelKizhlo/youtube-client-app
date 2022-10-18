@@ -30,12 +30,14 @@
 
   <div class="profile">
     <span class="mat-body-1 profile__name">Your name</span>
-    <button class="profile-button" mat-mini-fab color="primary" [mat-menu-trigger-for]="loginMenu">
-      <mat-icon>account_circle</mat-icon>
+    <button
+      class="profile__button"
+      [class.mat-button-disabled]="!isAuthenticated"
+      mat-mini-fab color="primary"
+      (click)="logout()"
+    >
+      <mat-icon>{{isAuthenticated ? 'logout' : 'account_circle'}}</mat-icon>
     </button>
-    <mat-menu #loginMenu="matMenu" xPosition="before">
-      <button mat-menu-item (click)="logout()">Logout</button>
-    </mat-menu>
   </div>
 </mat-toolbar>
 

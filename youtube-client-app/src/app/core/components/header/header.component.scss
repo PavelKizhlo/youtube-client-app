@@ -49,4 +49,10 @@
   &__name {
     margin-right: 10px;
   }
+
+  &__button,
+  .mat-mini-fab {
+    width: 48px;
+    height: 48px;
+  }
 }

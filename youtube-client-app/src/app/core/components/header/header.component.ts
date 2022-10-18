@@ -14,6 +14,8 @@ import { FormControl } from '@angular/forms';
 export class HeaderComponent implements OnInit, OnDestroy {
   showFilter = false;
 
+  isAuthenticated: boolean;
+
   searchField: FormControl;
 
   searchSub: Subscription;
@@ -31,6 +33,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe((str) => {
         this.searchService.startSearch(str);
       });
+
+    this.authService.isAuthenticated$.subscribe((isAuth) => (this.isAuthenticated = isAuth));
   }
 
   toggleFilter() {
@@ -38,7 +42,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.authService.logout();
+    if (this.isAuthenticated) {
+      this.authService.logout();
+    }
   }
 
   ngOnDestroy(): void {
