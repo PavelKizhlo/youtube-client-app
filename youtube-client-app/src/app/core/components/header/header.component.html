@@ -5,7 +5,6 @@
     <img class="logo" src="../../../../assets/youtube-logo.svg" alt="logo">
 
     <div class="search-bar">
-      <form class="search-form" (ngSubmit)="submit()">
         <mat-form-field class="search-form-field" appearance="outline">
           <mat-label>What do you want to find out?</mat-label>
           <input
@@ -14,11 +13,9 @@
             autocomplete="off"
             placeholder="Search ..."
             matInput
-            [(ngModel)]="searchString"
+            [formControl]="searchField"
           >
         </mat-form-field>
-        <button class="search-button" mat-raised-button color="primary" type="submit">Search</button>
-      </form>
     </div>
 
     <button
