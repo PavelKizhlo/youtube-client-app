@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 
-import { SearchResponseModel } from '../../../shared/models/search-response.model';
-import { SearchService } from '../../../core/services/search.service';
 import { FilterService } from '../../../core/services/filter.service';
-import { SortResultsService } from '../../services/sort-results.service';
 import { YoutubeFetchService } from '../../services/youtube-fetch.service';
-import { Subscription } from 'rxjs';
+import { SortParams } from '../../../shared/models/sort.model';
+import { SearchItemModel } from '../../../shared/models/search-item.model';
+import { SearchService } from '../../../core/services/search.service';
 
 @Component({
   selector: 'app-main-page',
@@ -13,7 +13,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent implements OnInit, OnDestroy {
-  searchData: SearchResponseModel;
+  searchString: string;
+
+  searchData: Observable<SearchItemModel[]>;
 
   filterString: string = '';
 
@@ -23,26 +25,22 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   filterSub: Subscription;
 
-  fetchSub: Subscription;
+  sortParams: SortParams = { sort: undefined, type: undefined };
 
   constructor(
-    private searchService: SearchService,
     private filterService: FilterService,
-    private sortResultsService: SortResultsService,
+    private searchService: SearchService,
     private youtubeFetchService: YoutubeFetchService,
   ) {}
 
   ngOnInit(): void {
-    this.searchData = this.youtubeFetchService.currentResults;
-
-    this.searchSub = this.searchService.searchString$.subscribe((searchString) => {
-      this.getSearchResults(searchString);
+    this.searchSub = this.searchService.searchString$.subscribe((str) => {
+      this.searchString = str;
+      this.searchData = this.youtubeFetchService.getVideoList(this.searchString);
     });
 
     this.sortSub = this.filterService.sortParams$.subscribe((sortParams) => {
-      if (this.searchData) {
-        this.sortResultsService.sortResults(this.searchData, sortParams);
-      }
+      this.sortParams = sortParams;
     });
 
     this.filterSub = this.filterService.filterString$.subscribe((filterString) => {
@@ -50,19 +48,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  getSearchResults(searchString: string) {
-    this.fetchSub = this.youtubeFetchService
-      .search(searchString)
-      .subscribe((results: SearchResponseModel) => {
-        this.searchData = results;
-        this.youtubeFetchService.currentResults = results;
-      });
-  }
-
   ngOnDestroy(): void {
-    // Should I unsubscribe from this ?
-    // this.fetchSub.unsubscribe();
-    this.searchSub.unsubscribe();
     this.sortSub.unsubscribe();
     this.filterSub.unsubscribe();
   }

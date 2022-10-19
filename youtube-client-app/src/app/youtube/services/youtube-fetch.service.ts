@@ -1,28 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable, switchMap } from 'rxjs';
 
 import { SearchResponseModel } from '../../shared/models/search-response.model';
-import { response } from '../../shared/mocks/response-example';
+import { Id, SearchItemModel } from '../../shared/models/search-item.model';
 
 @Injectable()
 export class YoutubeFetchService {
-  private _currentResults: SearchResponseModel;
+  constructor(private http: HttpClient) {}
 
-  get currentResults(): SearchResponseModel {
-    if (this._currentResults) {
-      return this._currentResults;
-    }
-    return <SearchResponseModel>JSON.parse(<string>localStorage.getItem('currentResults'));
-  }
+  getVideoList(searchString: string): Observable<SearchItemModel[]> {
+    const response = !searchString
+      ? this.http.get<SearchResponseModel>('https://www.googleapis.com/youtube/v3/videos', {
+          params: {
+            key: 'AIzaSyAHDKr6aBimyuw0ttfvSjaApEdBiv_18Mw',
+            part: 'snippet,statistics',
+            chart: 'mostPopular',
+            regionCode: 'BY',
+            maxResults: '20',
+          },
+        })
+      : this.http
+          .get<SearchResponseModel>('https://www.googleapis.com/youtube/v3/search', {
+            params: {
+              key: 'AIzaSyAHDKr6aBimyuw0ttfvSjaApEdBiv_18Mw',
+              part: 'snippet',
+              maxResults: '20',
+              q: searchString,
+            },
+          })
+          .pipe(
+            switchMap((videoList) => {
+              const ids = videoList.items.map((item) => (<Id>item.id).videoId);
+              return this.http.get<SearchResponseModel>(
+                'https://www.googleapis.com/youtube/v3/videos',
+                {
+                  params: {
+                    key: 'AIzaSyAHDKr6aBimyuw0ttfvSjaApEdBiv_18Mw',
+                    part: 'snippet,statistics',
+                    id: ids,
+                  },
+                },
+              );
+            }),
+          );
 
-  set currentResults(results: SearchResponseModel) {
-    this._currentResults = results;
-    localStorage.setItem('currentResults', JSON.stringify(results));
-  }
-
-  search(searchString: string): Observable<SearchResponseModel> {
-    // fake functionality
-    console.log(searchString);
-    return of(response);
+    return response.pipe(map((res) => res.items));
   }
 }
