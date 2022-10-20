@@ -47,4 +47,16 @@ export class YoutubeFetchService {
 
     return response.pipe(map((res) => res.items));
   }
+
+  getSingleVideo(id: string): Observable<SearchItemModel> {
+    return this.http
+      .get<SearchResponseModel>('https://www.googleapis.com/youtube/v3/videos', {
+        params: {
+          key: 'AIzaSyAHDKr6aBimyuw0ttfvSjaApEdBiv_18Mw',
+          part: 'snippet,statistics',
+          id: id,
+        },
+      })
+      .pipe(map((res) => res.items[0]));
+  }
 }
