@@ -11,9 +11,8 @@ export class YoutubeFetchService {
 
   getVideoList(searchString: string): Observable<SearchItemModel[]> {
     const response = !searchString
-      ? this.http.get<SearchResponseModel>('https://www.googleapis.com/youtube/v3/videos', {
+      ? this.http.get<SearchResponseModel>('/videos', {
           params: {
-            key: 'AIzaSyAHDKr6aBimyuw0ttfvSjaApEdBiv_18Mw',
             part: 'snippet,statistics',
             chart: 'mostPopular',
             regionCode: 'BY',
@@ -21,9 +20,8 @@ export class YoutubeFetchService {
           },
         })
       : this.http
-          .get<SearchResponseModel>('https://www.googleapis.com/youtube/v3/search', {
+          .get<SearchResponseModel>('/search', {
             params: {
-              key: 'AIzaSyAHDKr6aBimyuw0ttfvSjaApEdBiv_18Mw',
               part: 'snippet',
               maxResults: '20',
               q: searchString,
@@ -32,16 +30,12 @@ export class YoutubeFetchService {
           .pipe(
             switchMap((videoList) => {
               const ids = videoList.items.map((item) => (<Id>item.id).videoId);
-              return this.http.get<SearchResponseModel>(
-                'https://www.googleapis.com/youtube/v3/videos',
-                {
-                  params: {
-                    key: 'AIzaSyAHDKr6aBimyuw0ttfvSjaApEdBiv_18Mw',
-                    part: 'snippet,statistics',
-                    id: ids,
-                  },
+              return this.http.get<SearchResponseModel>('/videos', {
+                params: {
+                  part: 'snippet,statistics',
+                  id: ids,
                 },
-              );
+              });
             }),
           );
 
@@ -50,9 +44,8 @@ export class YoutubeFetchService {
 
   getSingleVideo(id: string): Observable<SearchItemModel> {
     return this.http
-      .get<SearchResponseModel>('https://www.googleapis.com/youtube/v3/videos', {
+      .get<SearchResponseModel>('/videos', {
         params: {
-          key: 'AIzaSyAHDKr6aBimyuw0ttfvSjaApEdBiv_18Mw',
           part: 'snippet,statistics',
           id: id,
         },
