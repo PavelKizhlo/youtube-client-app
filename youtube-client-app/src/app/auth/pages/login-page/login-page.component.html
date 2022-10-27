@@ -1,17 +1,31 @@
 <mat-card class="login mat-elevation-z11">
   <mat-card-title class="login__title">Login</mat-card-title>
 
-  <form class="login__form" (ngSubmit)="submit()">
+  <form class="login__form" [formGroup]="form" (ngSubmit)="submit()">
     <mat-form-field class="form-field" appearance="fill">
       <mat-label>Login</mat-label>
-      <input matInput autocomplete="off">
+      <input matInput autocomplete="off" formControlName="email">
+      <mat-error *ngIf="email.hasError('email') && email.touched">
+        The login email is invalid
+      </mat-error>
+      <mat-error *ngIf="email.hasError('required') && email.touched">
+        Please enter a login email
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="form-field" appearance="fill">
       <mat-label>Password</mat-label>
-      <input matInput type="password" autocomplete="off">
+      <input matInput type="password" autocomplete="off" formControlName="password">
+      <mat-error *ngIf="password.hasError('required') && password.touched">
+        Please enter a password
+      </mat-error>
+      <mat-error *ngIf="password.hasError('passRec')">
+        Your password isn't strong enough ({{password?.errors!['passRec']}})
+      </mat-error>
     </mat-form-field>
 
     <button
+      [class.mat-button-disabled]="form.invalid"
+      [disabled]="form.invalid"
       mat-raised-button
       color="accent"
       type="submit"
