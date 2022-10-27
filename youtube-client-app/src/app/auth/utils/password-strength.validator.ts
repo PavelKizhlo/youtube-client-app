@@ -15,11 +15,17 @@ export function PasswordStrengthValidator(): ValidatorFn {
 
     if (!longEnough) {
       return { passRec: 'at least 8 characters' };
-    } else if (!hasBothCases) {
+    }
+
+    if (!hasBothCases) {
       return { passRec: 'a mixture of both uppercase and lowercase letters' };
-    } else if (!hasDigitsAndLetters) {
+    }
+
+    if (!hasDigitsAndLetters) {
       return { passRec: 'a mixture of letters and numbers' };
-    } else if (!hasSpecialChars) {
+    }
+
+    if (!hasSpecialChars) {
       return { passRec: 'inclusion of at least one special character, e.g., ! @ # ?' };
     }
 
