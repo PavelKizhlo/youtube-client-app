@@ -35,17 +35,6 @@
       .mat-form-field-wrapper {
         padding: 0;
       }
-
-      .mat-form-field-outline-end {
-        border-radius: 0;
-      }
-    }
-
-    .search-button {
-      width: 100px;
-      height: 48px;
-      border-radius: 0 3px 3px 0;
-      font-size: 1rem;
     }
   }
 
@@ -59,5 +48,11 @@
 .profile {
   &__name {
     margin-right: 10px;
+  }
+
+  &__button,
+  .mat-mini-fab {
+    width: 48px;
+    height: 48px;
   }
 }

@@ -1,4 +1,4 @@
 <app-search-list
   *ngIf="searchData"
-  [searchData]="searchData.items | searchFilter:filterString"
+  [searchData]="(searchData | async)!  | sort:sortParams | searchFilter:filterString"
 ></app-search-list>

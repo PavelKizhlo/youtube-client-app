@@ -35,15 +35,19 @@ export interface Snippet {
 export interface Statistics {
   viewCount: string;
   likeCount: string;
-  dislikeCount: string;
   favoriteCount: string;
   commentCount: string;
+}
+
+export interface Id {
+  kind: string;
+  videoId: string;
 }
 
 export interface SearchItemModel {
   kind: string;
   etag: string;
-  id: string;
+  id: string | Id;
   snippet: Snippet;
   statistics: Statistics;
 }
