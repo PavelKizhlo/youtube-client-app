@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { debounceTime, distinctUntilChanged, filter, Subscription } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 import { SearchService } from '../../services/search.service';
 import { AuthService } from '../../../auth/services/auth.service';
-import { FormControl } from '@angular/forms';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-header',
@@ -20,10 +21,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   searchSub: Subscription;
 
-  constructor(private searchService: SearchService, private authService: AuthService) {}
+  nameSub: Subscription;
+
+  userName: string;
+
+  constructor(
+    private searchService: SearchService,
+    private authService: AuthService,
+    private filterService: FilterService,
+  ) {}
 
   ngOnInit(): void {
-    this.searchField = new FormControl('');
+    this.nameSub = this.authService.userName$.subscribe((name) => {
+      this.userName = name;
+    });
+
+    this.searchField = new FormControl({ value: '', disabled: true });
     this.searchSub = this.searchField.valueChanges
       .pipe(
         filter((value) => value.length >= 3),
@@ -34,7 +47,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.searchService.startSearch(str);
       });
 
-    this.authService.isAuthenticated$.subscribe((isAuth) => (this.isAuthenticated = isAuth));
+    this.authService.isAuthenticated$.subscribe((isAuth) => {
+      this.isAuthenticated = isAuth;
+      if (isAuth) {
+        this.searchField.enable();
+      } else {
+        this.searchField.setValue('');
+        this.searchField.disable();
+      }
+    });
   }
 
   toggleFilter() {
@@ -43,11 +64,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() {
     if (this.isAuthenticated) {
+      this.filterService.setViewSort(undefined);
+      this.filterService.setDateSort(undefined);
+      this.filterService.setFilterString('');
+
+      this.showFilter = false;
       this.authService.logout();
     }
   }
 
   ngOnDestroy(): void {
+    this.nameSub.unsubscribe();
     this.searchSub.unsubscribe();
   }
 }

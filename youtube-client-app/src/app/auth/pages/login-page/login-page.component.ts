@@ -30,16 +30,16 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
       email: this.email,
       password: this.password,
-     });
-     
+    });
+
     this.isAuthSub = this.authService.isAuthenticated$.subscribe((isAuth) => {
       this.isAuthenticated = isAuth;
     });
   }
 
-  submit() {
+  submitLoginForm() {
     if (!this.isAuthenticated) {
-      this.authService.login();
+      this.authService.login(this.email.value, this.password.value);
     }
   }
 

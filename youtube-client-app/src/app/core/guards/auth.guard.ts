@@ -5,7 +5,7 @@ import { map, Observable } from 'rxjs';
 import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
-export class MainPageGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): Observable<boolean | UrlTree> {

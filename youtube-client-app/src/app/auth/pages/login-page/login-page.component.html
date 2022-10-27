@@ -1,7 +1,7 @@
 <mat-card class="login mat-elevation-z11">
   <mat-card-title class="login__title">Login</mat-card-title>
 
-  <form class="login__form" [formGroup]="form" (ngSubmit)="submit()">
+  <form class="login__form" [formGroup]="form" (ngSubmit)="submitLoginForm()">
     <mat-form-field class="form-field" appearance="fill">
       <mat-label>Login</mat-label>
       <input matInput autocomplete="off" formControlName="email">
