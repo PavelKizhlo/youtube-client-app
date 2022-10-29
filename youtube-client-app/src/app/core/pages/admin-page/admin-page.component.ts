@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { ErrorStateMatcher } from '@angular/material/core';
+
 import { DateValidator } from '../../utils/date.validator';
+import { addCustomCard } from '../../../redux/actions/custom-cards.actions';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl): boolean {
+    return control && control.invalid && control.touched;
+  }
+}
 
 @Component({
   selector: 'app-admin-page',
@@ -14,11 +24,15 @@ export class AdminPageComponent implements OnInit {
 
   description: FormControl;
 
-  imgLink: FormControl;
+  imageLink: FormControl;
 
   videoLink: FormControl;
 
   date: FormControl;
+
+  matcher = new MyErrorStateMatcher();
+
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     const urlRegex =
@@ -30,20 +44,25 @@ export class AdminPageComponent implements OnInit {
       Validators.maxLength(20),
     ]);
     this.description = new FormControl('', Validators.maxLength(255));
-    this.imgLink = new FormControl('', [Validators.required, Validators.pattern(urlRegex)]);
+    this.imageLink = new FormControl('', [Validators.required, Validators.pattern(urlRegex)]);
     this.videoLink = new FormControl('', [Validators.required, Validators.pattern(urlRegex)]);
     this.date = new FormControl('', [Validators.required, DateValidator()]);
 
     this.form = new FormGroup({
       title: this.title,
       description: this.description,
-      imgLink: this.imgLink,
+      imageLink: this.imageLink,
       videoLink: this.videoLink,
       date: this.date,
     });
   }
 
-  submit() {
-    console.log(this.form);
+  createCustomCard() {
+    if (this.form.valid) {
+      const card = this.form.value;
+      this.store.dispatch(addCustomCard({ card: { ...card } }));
+
+      this.form.reset();
+    }
   }
 }

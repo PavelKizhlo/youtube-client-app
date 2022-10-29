@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { CardsReducer } from './redux/reducers/cards.reducer';
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -17,7 +18,7 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ cards: CardsReducer }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
