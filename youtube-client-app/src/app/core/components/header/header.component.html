@@ -14,6 +14,7 @@
             placeholder="Search ..."
             matInput
             [formControl]="searchField"
+            [disabled]="!isAuthenticated"
           >
         </mat-form-field>
     </div>
@@ -23,13 +24,33 @@
       mat-raised-button
       color="primary"
       (click)="toggleFilter()"
+      [class.mat-button-disabled]="!isAuthenticated"
+      [disabled]="!isAuthenticated"
     >
       <mat-icon>tune</mat-icon>
     </button>
+
+    <a
+      class="admin-link"
+      mat-raised-button
+      color="primary"
+      routerLink="admin"
+      [class.mat-button-disabled]="!isAuthenticated"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </a>
   </div>
 
   <div class="profile">
-    <span class="mat-body-1 profile__name">Your name</span>
+    <span
+      class="mat-body-1 profile__name"
+      *ngIf="userName; else loginMessage"
+    >{{userName}}</span>
+
+    <ng-template #loginMessage>
+      <span class="mat-body-1 profile__name">Please login</span>
+    </ng-template>
+
     <button
       class="profile__button"
       [class.mat-button-disabled]="!isAuthenticated"

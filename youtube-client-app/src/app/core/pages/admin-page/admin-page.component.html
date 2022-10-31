@@ -1,11 +1,11 @@
 <mat-card class="admin mat-elevation-z11">
   <mat-card-title class="admin__title">Login</mat-card-title>
 
-  <form class="admin__form" [formGroup]="form" (ngSubmit)="submit()">
+  <form class="admin__form" [formGroup]="form" (ngSubmit)="createCustomCard()">
 
     <mat-form-field class="form-field" appearance="fill">
       <mat-label>Title</mat-label>
-      <input matInput autocomplete="off" formControlName="title">
+      <input matInput autocomplete="off" formControlName="title" [errorStateMatcher]="matcher">
       <mat-error *ngIf="title.hasError('required') && title.touched">
         Please enter a title
       </mat-error>
@@ -19,7 +19,7 @@
 
     <mat-form-field class="form-field" appearance="fill">
       <mat-label>Description</mat-label>
-      <input matInput autocomplete="off" formControlName="description">
+      <input matInput autocomplete="off" formControlName="description" [errorStateMatcher]="matcher">
       <mat-error *ngIf="description.hasError('maxlength')">
         The description is too long
       </mat-error>
@@ -27,18 +27,18 @@
 
     <mat-form-field class="form-field" appearance="fill">
       <mat-label>Link to image</mat-label>
-      <input matInput autocomplete="off" formControlName="imgLink">
-      <mat-error *ngIf="imgLink.hasError('required') && imgLink.touched">
+      <input matInput autocomplete="off" formControlName="imageLink" [errorStateMatcher]="matcher">
+      <mat-error *ngIf="imageLink.hasError('required') && imageLink.touched">
         Please enter a link to the image
       </mat-error>
-      <mat-error *ngIf="imgLink.hasError('pattern')">
+      <mat-error *ngIf="imageLink.hasError('pattern')">
         The image link is invalid
       </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-field" appearance="fill">
       <mat-label>Link to video</mat-label>
-      <input matInput autocomplete="off" formControlName="videoLink">
+      <input matInput autocomplete="off" formControlName="videoLink" [errorStateMatcher]="matcher">
       <mat-error *ngIf="videoLink.hasError('required') && videoLink.touched">
         Please enter a link to the video
       </mat-error>
@@ -49,7 +49,7 @@
 
     <mat-form-field class="form-field" appearance="fill">
       <mat-label>Creation date</mat-label>
-      <input matInput autocomplete="off" formControlName="date">
+      <input matInput autocomplete="off" formControlName="date" [errorStateMatcher]="matcher">
       <mat-error *ngIf="date.hasError('required') && date.touched">
         Please enter a creation date"
       </mat-error>
